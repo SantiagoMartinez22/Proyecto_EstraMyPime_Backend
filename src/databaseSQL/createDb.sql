@@ -6,12 +6,12 @@ CREATE TABLE users (
                        name VARCHAR(255), -- Nombre de la persona o empresa
                        email VARCHAR(255) UNIQUE NOT NULL,
                        password VARCHAR(255) NOT NULL,
-                       typeUser ENUM('natural', 'juridica') NOT NULL, -- 'natural' para personas naturales, 'juridica' para empresas
+                       typeUser INT NOT NULL, -- '1' para personas naturales, '2' para empresas
                        sizeCompany INT DEFAULT NULL, -- Solo aplicable si es una empresa (persona jurídica)
                        sector INT DEFAULT NULL, -- Solo aplicable si es una empresa (persona jurídica)
                        registerDate DATETIME DEFAULT CURRENT_TIMESTAMP,
-                       isBookDownloaded BOOLEAN DEFAULT FALSE,
-                       isTestDone BOOLEAN DEFAULT FALSE
+                       isBookDownloaded bool ,
+                       isTestDone bool
 );
 
 -- Tabla tests: Relacionada con la tabla users (empresas y personas naturales)
@@ -55,7 +55,3 @@ CREATE TABLE admins (
                         lastname VARCHAR(255) DEFAULT NULL, -- Opcional, puede ser NULL
                         phoneNumber VARCHAR(20) DEFAULT NULL -- Opcional, puede ser NULL
 );
-
-
-
-
