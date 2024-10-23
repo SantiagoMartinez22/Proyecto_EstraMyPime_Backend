@@ -10,8 +10,8 @@ CREATE TABLE users (
                        sizeCompany INT DEFAULT NULL, -- Solo aplicable si es una empresa (persona jurídica)
                        sector INT DEFAULT NULL, -- Solo aplicable si es una empresa (persona jurídica)
                        registerDate DATETIME DEFAULT CURRENT_TIMESTAMP,
-                       isBookDownloaded BOOLEAN DEFAULT FALSE,
-                       isTestDone BOOLEAN DEFAULT FALSE
+                       isBookDownloaded bool DEFAULT FALSE,
+                       isTestDone bool DEFAULT FALSE
 );
 
 -- Tabla tests: Relacionada con la tabla users (empresas y personas naturales)
