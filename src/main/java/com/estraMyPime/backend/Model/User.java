@@ -40,4 +40,11 @@ public class User {
     @Column(name = "isTestDone", nullable = true)
     private boolean isTestDone ;
 
+
+    public void setBookDownloaded(boolean bookDownloaded) {
+        this.isBookDownloaded = bookDownloaded;
+    }
+    public void setTestDone(boolean testDone) {
+        this.isTestDone = testDone;
+    }
 }
