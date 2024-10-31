@@ -7,8 +7,6 @@ import jakarta.persistence.*;
 @Table(name="teachers")
 public class Profesor {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
 
 
@@ -51,4 +49,6 @@ public class Profesor {
     public void setprofesorParteProyecto(Boolean profesorParteProyecto) {
         this.profesorParteProyecto = profesorParteProyecto;
     }
+
+
 }
