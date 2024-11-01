@@ -11,6 +11,7 @@ import java.util.Optional;
 
 
 public interface TestRepository extends JpaRepository<Test, Long> {
-    Optional<Test> findByIdEmpresa(String idEmpresa);
+    Optional<Test> findByUserId(Long userId);
 }
+
 

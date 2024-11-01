@@ -1,7 +1,9 @@
 package com.estraMyPime.backend.Service;
 
 import com.estraMyPime.backend.Model.Test;
+import com.estraMyPime.backend.Model.User;
 import com.estraMyPime.backend.repository.TestRepository;
+import com.estraMyPime.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,8 @@ public class TestService {
     public TestService(TestRepository testRepository) {
         this.testRepository = testRepository;
     }
+    @Autowired
+    private UserRepository userRepository;
 
     // Obtener todos los tests
     public Iterable<Test> getAllTests() {

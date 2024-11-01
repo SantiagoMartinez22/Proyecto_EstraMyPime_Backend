@@ -4,12 +4,19 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import jakarta.persistence.*;
+import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "users")
 public class User {
 
     @Id
+
     private Long id;
 
     @Column(name = "name", nullable = false, length = 255)
@@ -21,31 +28,27 @@ public class User {
     @Column(name = "password", nullable = false, length = 255)
     private String password;
 
-
     @Column(name = "typeUser", nullable = false)
     private Integer typeUser;
 
-    @Column(name = "sizeCompany", nullable = true)
+    @Column(name = "sizeCompany")
     private Integer sizeCompany;
 
-    @Column(name = "sector", nullable = true)
+    @Column(name = "sector")
     private Integer sector;
 
     @Column(name = "registerDate", updatable = false)
     private LocalDateTime registerDate = LocalDateTime.now();
 
-    @Column(name = "isBookDownloaded", nullable = true)
-    private boolean isBookDownloaded ;
+    @Column(name = "isBookDownloaded")
+    private boolean isBookDownloaded;
 
-    @Column(name = "isTestDone", nullable = true)
-    private boolean isTestDone ;
+    @Column(name = "isTestDone")
+    private boolean isTestDone;
 
-
-    public void setBookDownloaded(boolean bookDownloaded) {
-        this.isBookDownloaded = bookDownloaded;
-    }
-    public void setTestDone(boolean testDone) {
-        this.isTestDone = testDone;
-    }
-
+    // Relación uno a muchos con Test
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Test> tests;
 }
+

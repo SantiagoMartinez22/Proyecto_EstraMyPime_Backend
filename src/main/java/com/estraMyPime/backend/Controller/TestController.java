@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/tests")
+@CrossOrigin(origins = "*") // Configura CORS
 public class TestController {
 
     private final TestService testService;
