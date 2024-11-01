@@ -1,5 +1,7 @@
 package com.estraMyPime.backend.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -9,6 +11,10 @@ import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.Data;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -16,8 +22,7 @@ import java.util.List;
 public class User {
 
     @Id
-
-    private Long id;
+    private Long id; // ID manual, sin autogeneración
 
     @Column(name = "name", nullable = false, length = 255)
     private String name;
@@ -46,9 +51,12 @@ public class User {
     @Column(name = "isTestDone")
     private boolean isTestDone;
 
-    // Relación uno a muchos con Test
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+
+    @JsonIgnore
     private List<Test> tests;
+
 }
+
+
 

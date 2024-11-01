@@ -5,18 +5,12 @@ import java.util.List;
 
 // import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import com.estraMyPime.backend.Model.Admin;
 import com.estraMyPime.backend.repository.AdminRepository;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class AdminController {
     
