@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name="student")
+@Table(name="students")
 public class Student {
     @Id
     private Long id;
@@ -14,6 +14,7 @@ public class Student {
 
     private String email;
     private String name;
+    @Column(name = "haceParteProyecto")
     private boolean haceParteProyecto;
 
     // Getters y setters
