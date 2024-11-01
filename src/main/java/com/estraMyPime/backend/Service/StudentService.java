@@ -18,68 +18,45 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    /**
-     * Guarda un estudiante.
-     * @param student El estudiante a guardar.
-     * @return El estudiante guardado.
-     */
-    public Student save(Student student) {
+
+
+    // Obtener estudiante por ID o email
+    public Optional<Student> getStudentByIdOrEmail(Long id, String email) {
+        if (id != null) {
+            return studentRepository.findById(id);
+        } else if (email != null && !email.isEmpty()) {
+            return studentRepository.findByEmail(email);
+        }
+        return Optional.empty();
+    }
+
+    // Guardar o actualizar un estudiante
+    public Student saveStudent(Student student) {
+        if (student.getId() != null && studentRepository.existsById(student.getId())) {
+            throw new RuntimeException("El ID del estudiante ya existe");
+        }
         return studentRepository.save(student);
     }
 
-    /**
-     * Encuentra todos los estudiantes.
-     * @return Una lista de todos los estudiantes.
-     */
-    public List<Student> findAll() {
-        return studentRepository.findAll();
+    // Actualizar campoHaceParteProyecto
+    public Student updateHaceParteProyecto(Long id, boolean haceParteProyecto) {
+        Student student = studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Estudiante no encontrado"));
+        student.setHaceParteProyecto(haceParteProyecto);
+        return studentRepository.save(student);
     }
 
-    /**
-     * Encuentra un estudiante por ID.
-     * @param id El ID del estudiante.
-     * @return El estudiante encontrado.
-     * @throws NoSuchElementException si el estudiante no se encuentra.
-     */
-    public Student findById(Long id) {
-        return studentRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Estudiante no encontrado con id " + id));
-    }
 
-    /**
-     * Elimina un estudiante por ID.
-     * @param id El ID del estudiante a eliminar.
-     */
-    public void delete(Long id) {
-        studentRepository.deleteById(id);
-    }
 
-    /**
-     * Obtiene un estudiante por ID de manera opcional.
-     * @param id El ID del estudiante.
-     * @return Un Optional con el estudiante encontrado.
-     */
-    public Optional<Student> getStudentById(Long id) {
-        return studentRepository.findById(id);
-    }
-
-    /**
-     * Actualiza un estudiante.
-     * @param id El ID del estudiante a actualizar.
-     * @param studentDetails Los detalles del estudiante a actualizar.
-     * @return El estudiante actualizado.
-     * @throws NoSuchElementException si el estudiante no se encuentra.
-     */
-    public Student updateStudent(Long id, Student studentDetails) {
-        Optional<Student> optionalStudent = studentRepository.findById(id);
-        if (optionalStudent.isPresent()) {
-            Student existingStudent = optionalStudent.get();
-            existingStudent.setEmail(studentDetails.getEmail());
-            existingStudent.setName(studentDetails.getName());
-            existingStudent.setHaceParteProyecto(studentDetails.getHaceParteProyecto());
-            return studentRepository.save(existingStudent);
-        } else {
-            throw new NoSuchElementException("Estudiante no encontrado con id " + id);
-        }
-    }
 }
+
+
+
+
+
+
+
+
+
+
+
