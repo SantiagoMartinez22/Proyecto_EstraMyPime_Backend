@@ -1,26 +1,21 @@
 package com.estraMyPime.backend.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 
+import jakarta.persistence.*;
 
 
 @Entity
+@Table(name="students")
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
-
 
     @Column(unique = true, nullable = false)
 
     private String email;
     private String name;
-    private boolean haceParteProyecto = true;
+    @Column(name = "haceParteProyecto")
+    private boolean haceParteProyecto;
 
     // Getters y setters
 
