@@ -47,4 +47,5 @@ public class User {
     public void setTestDone(boolean testDone) {
         this.isTestDone = testDone;
     }
+
 }

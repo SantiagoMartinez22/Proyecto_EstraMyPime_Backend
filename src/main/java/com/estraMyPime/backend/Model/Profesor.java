@@ -1,21 +1,20 @@
 package com.estraMyPime.backend.Model;
 
-
 import jakarta.persistence.*;
 
 
 @Entity
-@Table(name="students")
-public class Student {
+@Table(name="teachers")
+public class Profesor {
     @Id
     private Long id;
+
 
     @Column(unique = true, nullable = false)
 
     private String email;
     private String name;
-    @Column(name = "haceParteProyecto")
-    private boolean haceParteProyecto;
+    private boolean profesorParteProyecto = true;
 
     // Getters y setters
 
@@ -43,11 +42,13 @@ public class Student {
         this.name = name;
     }
 
-    public Boolean getHaceParteProyecto() {
-        return haceParteProyecto;
+    public Boolean getprofesorParteProyecto() {
+        return profesorParteProyecto;
     }
 
-    public void setHaceParteProyecto(Boolean haceParteProyecto) {
-        this.haceParteProyecto = haceParteProyecto;
+    public void setprofesorParteProyecto(Boolean profesorParteProyecto) {
+        this.profesorParteProyecto = profesorParteProyecto;
     }
+
+
 }
