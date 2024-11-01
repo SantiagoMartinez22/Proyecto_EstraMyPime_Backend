@@ -6,6 +6,7 @@ import com.estraMyPime.backend.repository.TestRepository;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/v1")
+@RequestMapping("/api/tests")
 public class TestController {
 
     private final TestService testService;
@@ -24,32 +25,54 @@ public class TestController {
         this.testService = testService;
     }
 
-    @GetMapping("tests")
+    // Obtener todos los tests
+    @GetMapping
     public ResponseEntity<Iterable<Test>> getAllTests() {
         return ResponseEntity.ok(testService.getAllTests());
     }
 
-    @GetMapping("test/{id}")
-    public ResponseEntity<Test> getTest(@PathVariable Integer id) {
+    // Obtener un test por ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Test> getTest(@PathVariable Long id) {
         try {
-            return ResponseEntity.ok(testService.getTest(id));
-        }catch (Exception e) {
-            return  ResponseEntity.status(502).body(null);
+            Test test = testService.getTest(id);
+            return ResponseEntity.ok(test);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 
-    @PostMapping("test")
-    public ResponseEntity<String> createTest(@RequestBody Test test) {
-        return ResponseEntity.ok(testService.createTest(test));
+    // Crear un nuevo test
+    @PostMapping("/user/{userId}")
+    public ResponseEntity<Void> createTest(@PathVariable Long userId, @RequestBody Test test) {
+        try {
+            testService.createTest(userId, test);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
-    @DeleteMapping("test/{id}")
-    public ResponseEntity<String> deleteTest(@PathVariable Integer id) {
-      return ResponseEntity.ok(testService.deleteTest(id));
+
+    // Actualizar un test existente por ID
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateTest(@PathVariable Long id, @RequestBody Test newTest) {
+        try {
+            testService.updateTest(id, newTest);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
-    @PutMapping("test/{id}")
-    public ResponseEntity<String> updateTest(@PathVariable Integer id, @RequestBody Test newtest) {
-       return ResponseEntity.ok(testService.updateTest(id,newtest));
+    // Eliminar un test por ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTest(@PathVariable Long id) {
+        try {
+            testService.deleteTest(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 }
