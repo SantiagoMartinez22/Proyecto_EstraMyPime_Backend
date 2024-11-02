@@ -11,10 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/users")
@@ -63,6 +60,16 @@ public class UserController {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+    // Endpoint para actualizar el campo isTestDone de un usuario específico
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> updateUserIsTestDone(@PathVariable Long id, @RequestBody User userUpdate) {
+        try {
+            userService.updateIsTestDone(id, userUpdate.isTestDone());
+            return ResponseEntity.ok().build();
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 }

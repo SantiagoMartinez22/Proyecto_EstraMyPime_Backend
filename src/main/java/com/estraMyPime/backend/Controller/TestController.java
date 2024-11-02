@@ -1,6 +1,9 @@
 package com.estraMyPime.backend.Controller;
 
 import com.estraMyPime.backend.Model.Test;
+import com.estraMyPime.backend.Model.TestDTO;
+import com.estraMyPime.backend.Model.User;
+import com.estraMyPime.backend.Model.UserDTO;
 import com.estraMyPime.backend.Service.TestService;
 import com.estraMyPime.backend.repository.TestRepository;
 import lombok.AllArgsConstructor;
@@ -14,65 +17,72 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/api/tests")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TestController {
 
-    private final TestService testService;
-
     @Autowired
-    public TestController(TestService testService) {
-        this.testService = testService;
+    private TestService testService;
+
+    @GetMapping("/all")
+    public List<TestDTO> getAllTests() {
+        List<Test> tests = testService.getAllTests();
+        return tests.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
-    // Obtener todos los tests
+    private TestDTO convertToDTO(Test test) {
+        User user = test.getUser();
+        UserDTO userDTO = new UserDTO(user.getId(), user.getName(), user.getEmail());
+        return new TestDTO(test.getId(), test.getPregunta1(), test.getPregunta2(),
+                test.getPregunta3(), test.getPregunta4(), test.getPregunta5(),
+                test.getPregunta6(), test.getPregunta7(), test.getPregunta8(),
+                test.getPregunta9(), userDTO);
+    }
+
+    // Obtener los tests de un usuario específico
     @GetMapping
-    public ResponseEntity<Iterable<Test>> getAllTests() {
-        return ResponseEntity.ok(testService.getAllTests());
+    public List<Test> getTestsByUserId(@RequestParam Long id) {
+        return testService.getTestsByUserId(id);
     }
 
-    // Obtener un test por ID
+    // Obtener un test específico por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Test> getTest(@PathVariable Long id) {
-        try {
-            Test test = testService.getTest(id);
-            return ResponseEntity.ok(test);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
+    public Optional<Test> getTest(@PathVariable Long id) {
+        return testService.getTest(id);
     }
 
     // Crear un nuevo test
-    @PostMapping("/user/{userId}")
-    public ResponseEntity<Void> createTest(@PathVariable Long userId, @RequestBody Test test) {
-        try {
-            testService.createTest(userId, test);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    @PostMapping
+    public Test createTest(@RequestBody Test test) {
+        return testService.createTest(test);
     }
 
-
-    // Actualizar un test existente por ID
+    // Actualizar un test existente
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateTest(@PathVariable Long id, @RequestBody Test newTest) {
-        try {
-            testService.updateTest(id, newTest);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    public Test updateTest(@PathVariable Long id, @RequestBody Test testDetails) {
+        return testService.updateTest(id, testDetails);
     }
 
-    // Eliminar un test por ID
+    // Eliminar un test
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTest(@PathVariable Long id) {
-        try {
-            testService.deleteTest(id);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    public void deleteTest(@PathVariable Long id) {
+        testService.deleteTest(id);
     }
 }
+
+
+
