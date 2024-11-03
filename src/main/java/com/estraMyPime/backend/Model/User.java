@@ -1,14 +1,13 @@
 package com.estraMyPime.backend.Model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 import jakarta.persistence.*;
 import lombok.Data;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Data;
@@ -52,8 +51,7 @@ public class User {
     private boolean isTestDone;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-
-    @JsonIgnore
+    @JsonManagedReference
     private List<Test> tests;
 
 }
