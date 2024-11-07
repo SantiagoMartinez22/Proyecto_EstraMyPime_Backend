@@ -35,7 +35,9 @@ CREATE TABLE students (
                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
                           email VARCHAR(255) UNIQUE NOT NULL,
                           name VARCHAR(255) DEFAULT NULL, -- Opcional, puede ser NULL
-                          haceParteProyecto BOOLEAN DEFAULT TRUE
+                          haceParteProyecto BOOLEAN DEFAULT TRUE,
+                          empresa_id BIGINT NULL, -- Nueva columna para la clave foránea
+                          FOREIGN KEY (empresa_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 -- Tabla teachers: Almacena la información de los profesores, con datos opcionales
@@ -44,6 +46,8 @@ CREATE TABLE teachers (
                           email VARCHAR(255) UNIQUE NOT NULL,
                           name VARCHAR(255) DEFAULT NULL, -- Opcional, puede ser NULL
                           profesorParteProyecto BOOLEAN DEFAULT TRUE
+                          empresa_id BIGINT NULL, -- Nueva columna para la clave foránea
+                          FOREIGN KEY (empresa_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 -- Tabla admins: Almacena la información de los administradores, con datos opcionales

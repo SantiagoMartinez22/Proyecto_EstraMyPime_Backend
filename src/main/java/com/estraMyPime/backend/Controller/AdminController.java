@@ -1,10 +1,11 @@
 package com.estraMyPime.backend.Controller;
 
 import java.util.List;
-
+import java.util.Optional;
 
 // import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,9 +29,10 @@ public class AdminController {
         adminRepo.save(admi);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/admins")//funciona
-    public List<Admin> seeAdmin(){
-        return adminRepo.findAll();
+    public Optional<Admin> seeAdmin(@RequestParam(value="email") String email){
+        return adminRepo.findByEmail(email);
     }
 
     @DeleteMapping("/admins")//funciona
