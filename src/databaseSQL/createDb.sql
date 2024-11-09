@@ -36,7 +36,7 @@ CREATE TABLE students (
                           email VARCHAR(255) UNIQUE NOT NULL,
                           name VARCHAR(255) DEFAULT NULL, -- Opcional, puede ser NULL
                           haceParteProyecto BOOLEAN DEFAULT TRUE,
-                          empresa_id BIGINT NULL, -- Nueva columna para la clave foránea
+                          empresa_id BIGINT NULL, -- Nueva columna para relacionarse con la tabla users (empresas)
                           FOREIGN KEY (empresa_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
@@ -46,7 +46,7 @@ CREATE TABLE teachers (
                           email VARCHAR(255) UNIQUE NOT NULL,
                           name VARCHAR(255) DEFAULT NULL, -- Opcional, puede ser NULL
                           profesorParteProyecto BOOLEAN DEFAULT TRUE
-                          empresa_id BIGINT NULL, -- Nueva columna para la clave foránea
+                          empresa_id BIGINT NULL, -- Nueva columna para relacionarse con la tabla users (empresas)
                           FOREIGN KEY (empresa_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
