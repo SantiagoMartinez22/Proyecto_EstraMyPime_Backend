@@ -39,7 +39,7 @@ public class StudentService {
     }
 
     // Actualizar campoHaceParteProyecto
-    public Student updateHaceParteProyecto(Long id, boolean haceParteProyecto) {
+    public Student updateHaceParteProyecto(Long id, byte haceParteProyecto) {
         Student student = studentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Estudiante no encontrado"));
         student.setHaceParteProyecto(haceParteProyecto);
