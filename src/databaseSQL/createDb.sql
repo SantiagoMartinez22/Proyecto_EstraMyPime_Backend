@@ -45,7 +45,7 @@ CREATE TABLE teachers (
                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
                           email VARCHAR(255) UNIQUE NOT NULL,
                           name VARCHAR(255) DEFAULT NULL, -- Opcional, puede ser NULL
-                          profesorParteProyecto BOOLEAN DEFAULT TRUE
+                          profesorParteProyecto BOOLEAN DEFAULT TRUE,
                           empresa_id BIGINT NULL, -- Nueva columna para relacionarse con la tabla users (empresas)
                           FOREIGN KEY (empresa_id) REFERENCES users(id) ON DELETE CASCADE
 );
