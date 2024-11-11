@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.estraMyPime.backend.Model.Admin;
 import com.estraMyPime.backend.repository.AdminRepository;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class AdminController {
     

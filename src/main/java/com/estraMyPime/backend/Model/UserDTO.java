@@ -1,18 +1,16 @@
 package com.estraMyPime.backend.Model;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserDTO {
     private Long id;
     private String name;
     private String email;
-    private String password;
-    private int typeUser;
-    private int sizeCompany;
-    private int sector;
-    private boolean isBookDownloaded;
-    private boolean isTestDone;
 }
-
