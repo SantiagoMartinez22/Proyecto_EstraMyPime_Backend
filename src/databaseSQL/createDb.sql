@@ -37,7 +37,9 @@ CREATE TABLE students (
                           name VARCHAR(255) DEFAULT NULL, -- Opcional, puede ser NULL
                           haceParteProyecto BOOLEAN DEFAULT TRUE,
                           empresa_id BIGINT NULL, -- Nueva columna para relacionarse con la tabla users (empresas)
-                          FOREIGN KEY (empresa_id) REFERENCES users(id) ON DELETE CASCADE
+                          profesor_id BIGINT NULL, -- Nueva columna para relacionarse con la tabla teachers
+                          FOREIGN KEY (empresa_id) REFERENCES users(id) ON DELETE CASCADE,
+                          FOREIGN KEY (profesor_id) REFERENCES teachers(id) ON DELETE CASCADE
 );
 
 -- Tabla teachers: Almacena la información de los profesores, con datos opcionales
