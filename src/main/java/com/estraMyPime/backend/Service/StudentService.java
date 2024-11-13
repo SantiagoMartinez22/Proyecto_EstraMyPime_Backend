@@ -25,7 +25,7 @@ public class StudentService {
         if (id != null) {
             return studentRepository.findById(id);
         } else if (email != null && !email.isEmpty()) {
-            return studentRepository.findByEmail(email);
+            return studentRepository.findByEmailOrId(email, id);
         }
         return Optional.empty();
     }

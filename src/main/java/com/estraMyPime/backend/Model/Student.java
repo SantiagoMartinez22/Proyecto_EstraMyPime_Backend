@@ -24,7 +24,7 @@ public class Student {
     @Column(name = "empresa_id", nullable = true)
     private Long empresa_id;
 
-    @Column(name = "profesor_id", nullable = true)
+    @Column(name = "profesor_id", nullable = false)
     private Long profesor_id;
 
 

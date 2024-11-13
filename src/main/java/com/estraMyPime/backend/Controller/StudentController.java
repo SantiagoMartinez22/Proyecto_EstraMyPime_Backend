@@ -20,7 +20,7 @@ public class StudentController {
     // Buscar estudiante por ID o email
     @GetMapping
     public Optional<Student> searchStudent(@RequestParam(required = false) Long id, @RequestParam(required = false) String email) {
-        return studentService.findByEmail(email);
+        return studentService.findByEmailOrId(email, id);
     }
 
     // Agregar o actualizar un estudiante en el sistema
