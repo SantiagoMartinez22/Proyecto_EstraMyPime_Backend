@@ -28,30 +28,30 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@RestController
 @RequestMapping("/api/tests")
 @CrossOrigin(origins = "http://localhost:4200")
+@RestController
 public class TestController {
 
     @Autowired
     private TestService testService;
 
-    @GetMapping("/all")
-    public List<TestDTO> getAllTests() {
-        List<Test> tests = testService.getAllTests();
-        return tests.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-    }
+    // @GetMapping("/all")
+    // public List<TestDTO> getAllTests() {
+    //     List<Test> tests = testService.getAllTests();
+    //     return tests.stream()
+    //             .map(this::convertToDTO)
+    //             .collect(Collectors.toList());
+    // }
 
-    private TestDTO convertToDTO(Test test) {
-        User user = test.getUser();
-        UserDTO userDTO = new UserDTO(user.getId(), user.getName(), user.getEmail());
-        return new TestDTO(test.getId(), test.getPregunta1(), test.getPregunta2(),
-                test.getPregunta3(), test.getPregunta4(), test.getPregunta5(),
-                test.getPregunta6(), test.getPregunta7(), test.getPregunta8(),
-                test.getPregunta9(), userDTO);
-    }
+    // private TestDTO convertToDTO(Test test) {
+    //     // User user = test.getUser();
+    //     // UserDTO userDTO = new UserDTO(user.getId(), user.getName(), user.getEmail());
+    //     // return new TestDTO(test.getId(), test.getPregunta1(), test.getPregunta2(),
+    //     //         test.getPregunta3(), test.getPregunta4(), test.getPregunta5(),
+    //     //         test.getPregunta6(), test.getPregunta7(), test.getPregunta8(),
+    //     //         test.getPregunta9(), userDTO);
+    // }
 
     // Obtener los tests de un usuario específico
     @GetMapping
@@ -66,7 +66,7 @@ public class TestController {
     }
 
     // Crear un nuevo test
-    @PostMapping
+    @PostMapping(consumes = "application/json", produces = "application/json")
     public Test createTest(@RequestBody Test test) {
         return testService.createTest(test);
     }
