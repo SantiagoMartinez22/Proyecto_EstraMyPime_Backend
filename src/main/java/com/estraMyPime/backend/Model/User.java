@@ -22,6 +22,7 @@ import java.util.List;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // ID manual, sin autogeneración
 
     @Column(name = "name", nullable = false, length = 255)
