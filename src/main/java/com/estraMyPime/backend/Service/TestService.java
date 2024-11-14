@@ -30,36 +30,29 @@ public class TestService {
     @Autowired
     private UserService userService;
 
-    // Obtener todos los tests
     public List<Test> getAllTests() {
         return testRepository.findAll();
     }
 
-    // Obtener tests por el ID del usuario
     public List<Test> getTestsByUserId(Long userId) {
         return testRepository.findByUserId(userId);
     }
 
-    // Crear un nuevo test y actualizar la bandera isTestDone
     public Test createTest(Test test) {
-        // Guardar el test y actualizar isTestDone en el usuario relacionado
         Test savedTest = testRepository.save(test);
         userService.updateIsTestDone(test.getUser().getId(), true);
         return savedTest;
     }
 
-    // Obtener un test por su ID
     public Optional<Test> getTest(Long testId) {
         return testRepository.findById(testId);
     }
 
-    // Actualizar un test existente
     @Transactional
     public Test updateTest(Long id, Test testDetails) {
         Test test = testRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Test not found with id: " + id));
 
-        // Actualizar los detalles del test
         test.setPregunta1(testDetails.getPregunta1());
         test.setPregunta2(testDetails.getPregunta2());
         test.setPregunta3(testDetails.getPregunta3());
@@ -75,8 +68,8 @@ public class TestService {
         return updatedTest;
     }
 
-    // Eliminar un test
     public void deleteTest(Long id) {
         testRepository.deleteById(id);
     }
 }
+

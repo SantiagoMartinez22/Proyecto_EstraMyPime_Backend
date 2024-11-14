@@ -2,19 +2,28 @@ package com.estraMyPime.backend.Model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 
 @Entity
-@Table(name="teachers")
+@Table(name = "teachers")
 public class Profesor {
+
     @Id
     private Long id;
 
-
     @Column(unique = true, nullable = false)
-
     private String email;
+
     private String name;
+
     private boolean profesorParteProyecto = true;
+
+    @OneToMany(mappedBy = "profesor", cascade = CascadeType.ALL)
+    private List<Student> estudiantes;
+
+    // Getters y setters
+
 
     // Getters y setters
 
@@ -42,13 +51,14 @@ public class Profesor {
         this.name = name;
     }
 
-    public Boolean getprofesorParteProyecto() {
+    public Boolean getProfesorParteProyecto() {
         return profesorParteProyecto;
     }
 
-    public void setprofesorParteProyecto(Boolean profesorParteProyecto) {
+    public void setProfesorParteProyecto(Boolean profesorParteProyecto) {
         this.profesorParteProyecto = profesorParteProyecto;
     }
 
-
 }
+
+

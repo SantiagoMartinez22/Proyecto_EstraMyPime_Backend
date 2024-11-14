@@ -1,6 +1,7 @@
 package com.estraMyPime.backend.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -9,7 +10,6 @@ import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
-
 @Data
 @Entity
 @Table(name = "tests")
@@ -17,6 +17,7 @@ public class Test {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
     @Column(name = "pregunta1")
@@ -46,11 +47,14 @@ public class Test {
     @Column(name = "pregunta9")
     private String pregunta9;
 
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonManagedReference
-    private User user; // Relación directa con User
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private User user;
 }
+
 
 
 

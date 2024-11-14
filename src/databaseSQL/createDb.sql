@@ -55,3 +55,20 @@ CREATE TABLE admins (
                         lastname VARCHAR(255) DEFAULT NULL, -- Opcional, puede ser NULL
                         phoneNumber VARCHAR(20) DEFAULT NULL -- Opcional, puede ser NULL
 );
+
+CREATE TABLE empresa_student_teacher (
+                                         empresa_id BIGINT,
+                                         student_id BIGINT,
+                                         teacher_id BIGINT,
+                                         PRIMARY KEY (empresa_id, student_id),
+                                         FOREIGN KEY (empresa_id) REFERENCES users(id) ON DELETE CASCADE,
+                                         FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
+                                         FOREIGN KEY (teacher_id) REFERENCES teachers(id) ON DELETE CASCADE
+);
+
+ALTER TABLE students
+    ADD COLUMN teacher_id BIGINT,
+ADD FOREIGN KEY (teacher_id) REFERENCES teachers(id) ON DELETE SET NULL;
+
+
+ALTER TABLE tests MODIFY COLUMN id BIGINT AUTO_INCREMENT;

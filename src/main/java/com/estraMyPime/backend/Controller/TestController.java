@@ -53,36 +53,30 @@ public class TestController {
                 test.getPregunta9(), userDTO);
     }
 
-    // Obtener los tests de un usuario específico
+
+
     @GetMapping
-    public List<Test> getTestsByUserId(@RequestParam Long id) {
-        return testService.getTestsByUserId(id);
+    public List<Test> getTestsByUserId(@RequestParam("userId") Long userId) {
+        return testService.getTestsByUserId(userId);
     }
 
-    // Obtener un test específico por ID
     @GetMapping("/{id}")
     public Optional<Test> getTest(@PathVariable Long id) {
         return testService.getTest(id);
     }
 
-    // Crear un nuevo test
     @PostMapping
     public Test createTest(@RequestBody Test test) {
         return testService.createTest(test);
     }
 
-    // Actualizar un test existente
     @PutMapping("/{id}")
     public Test updateTest(@PathVariable Long id, @RequestBody Test testDetails) {
         return testService.updateTest(id, testDetails);
     }
 
-    // Eliminar un test
     @DeleteMapping("/{id}")
     public void deleteTest(@PathVariable Long id) {
         testService.deleteTest(id);
     }
 }
-
-
-
