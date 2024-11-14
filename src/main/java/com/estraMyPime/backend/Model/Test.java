@@ -1,12 +1,10 @@
 package com.estraMyPime.backend.Model;
 
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
 import jakarta.persistence.*;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 
@@ -48,8 +46,13 @@ public class Test {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonManagedReference
+
+    @JsonBackReference
     private User user; // Relación directa con User
+
+
+
+
 }
 
 

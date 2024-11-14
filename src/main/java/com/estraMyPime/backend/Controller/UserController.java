@@ -1,9 +1,7 @@
 package com.estraMyPime.backend.Controller;
 
 
-
 import com.estraMyPime.backend.Model.User;
-
 import com.estraMyPime.backend.Model.UserDTO;
 import com.estraMyPime.backend.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +14,6 @@ import java.util.*;
 @RestController
 @RequestMapping("/api/users")
 @CrossOrigin(origins = "http://localhost:4200")
-
-
 public class UserController {
 
     @Autowired
@@ -31,9 +27,17 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         Optional<User> user = userService.getUserById(id);
+        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+
+    @GetMapping("/api/users")
+    public ResponseEntity<User> getUsersByEmail(@RequestParam String email) {
+        Optional<User> user = userService.getUserByEmail(email);
         return user.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
 
     @PostMapping
     public ResponseEntity<Map<String, String>> createUser(@RequestBody User user) {
@@ -72,4 +76,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+
+
 }

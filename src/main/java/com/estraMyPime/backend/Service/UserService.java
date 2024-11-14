@@ -25,6 +25,7 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+
     public Map<String, String> createUser(User user) {
         Map<String, String> response = new HashMap<>();
 
@@ -81,6 +82,11 @@ public class UserService {
                 .orElseThrow(() -> new NoSuchElementException("Usuario no encontrado con ID: " + userId));
         user.setTestDone(isTestDone);
         userRepository.save(user);
+    }
+
+
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }
 
