@@ -32,7 +32,6 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/tests")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", allowCredentials = "true", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.PATCH, RequestMethod.DELETE})
 
-
 public class TestController {
 
     @Autowired

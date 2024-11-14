@@ -39,10 +39,25 @@ public class TestService {
     }
 
     public Test createTest(Test test) {
+        // Verificar que el user no sea null
+        if (test.getUser() == null || test.getUser().getId() == null) {
+            throw new RuntimeException("El usuario no puede ser nulo al crear un Test");
+        }
+
+        // Buscar el usuario en la base de datos para asegurarse de que existe
+        User user = userService.getUserById(test.getUser().getId())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        // Asignar el usuario encontrado al Test
+        test.setUser(user);
+
         Test savedTest = testRepository.save(test);
         userService.updateIsTestDone(test.getUser().getId(), true);
         return savedTest;
     }
+
+
+
 
     public Optional<Test> getTest(Long testId) {
         return testRepository.findById(testId);
