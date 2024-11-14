@@ -1,11 +1,14 @@
 package com.estraMyPime.backend.Controller;
 
+import com.estraMyPime.backend.Model.Profesor;
 import com.estraMyPime.backend.Model.Student;
 import com.estraMyPime.backend.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Optional;
 @RestController
 @RequestMapping("/api/students")
@@ -14,7 +17,10 @@ public class StudentController {
 
     @Autowired
     private StudentService studentService;
-
+    @GetMapping("/all")
+    public List<Student> getAllStudents() {
+        return studentService.getAllStudents();
+    }
     // Buscar estudiante por ID o email
     @GetMapping
     public Optional<Student> searchStudent(@RequestParam(required = false) Long id, @RequestParam(required = false) String email) {

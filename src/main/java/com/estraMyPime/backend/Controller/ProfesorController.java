@@ -1,6 +1,7 @@
 package com.estraMyPime.backend.Controller;
 
 import com.estraMyPime.backend.Model.Profesor;
+import com.estraMyPime.backend.Model.User;
 import com.estraMyPime.backend.Service.ProfesorService;
 import com.estraMyPime.backend.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-
+import java.util.List;
 import java.util.Optional;
 @RestController
 @RequestMapping("/api/teachers")
@@ -20,6 +21,18 @@ public class ProfesorController {
 
     @Autowired
     private UserService userService;
+
+    @GetMapping("/all")
+    public List<Profesor> getAllProfesores() {
+        return profesorService.getAllTeachers();
+    }
+
+    // Eliminar un profesor por ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteProfesor(@PathVariable Long id) {
+        profesorService.deleteProfesorById(id);
+        return ResponseEntity.ok("Profesor eliminado correctamente");
+    }
 
     // Buscar profesor por ID o email
     @GetMapping

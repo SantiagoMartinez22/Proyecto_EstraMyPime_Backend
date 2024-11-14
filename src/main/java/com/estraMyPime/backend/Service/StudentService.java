@@ -3,6 +3,7 @@
  */
 package com.estraMyPime.backend.Service;
 
+import com.estraMyPime.backend.Model.Profesor;
 import com.estraMyPime.backend.Model.User;
 import com.estraMyPime.backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -55,5 +56,9 @@ public class StudentService {
                 .orElseThrow(() -> new RuntimeException("Empresa no encontrada"));
         empresa.getEstudiantes().add(student);
         userRepository.save(empresa);
+    }
+
+    public List<Student> getAllStudents() {
+        return studentRepository.findAll();
     }
 }

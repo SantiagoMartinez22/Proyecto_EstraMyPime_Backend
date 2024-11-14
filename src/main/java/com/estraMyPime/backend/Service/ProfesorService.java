@@ -7,6 +7,7 @@ import com.estraMyPime.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,6 +18,10 @@ public class ProfesorService {
 
     @Autowired
     private UserRepository userRepository;
+
+    public  List<Profesor> getAllTeachers() {
+        return profesorRepository.findAll();
+    }
 
     public Optional<Profesor> getProfesorByIdOrEmail(Long id, String email) {
         if (id != null) {
@@ -48,5 +53,12 @@ public class ProfesorService {
                 .orElseThrow(() -> new RuntimeException("Empresa no encontrada"));
         empresa.getProfesores().add(profesor);
         userRepository.save(empresa);
+    }
+    public void deleteProfesorById(Long id) {
+        if (profesorRepository.existsById(id)) {
+            profesorRepository.deleteById(id);
+        } else {
+            throw new IllegalArgumentException("El profesor con el ID proporcionado no existe.");
+        }
     }
 }
