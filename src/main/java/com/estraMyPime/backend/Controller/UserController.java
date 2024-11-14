@@ -72,4 +72,11 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+    @PatchMapping("/{userId}/test-done")
+    public ResponseEntity<?> updateTestDone(@PathVariable Long userId, @RequestBody Map<String, Boolean> isTestDone) {
+        boolean testDone = isTestDone.getOrDefault("isTestDone", false);
+        userService.updateIsTestDone(userId, testDone); // Asegúrate de que este método existe en tu UserService
+        return ResponseEntity.ok().build();
+    }
+
 }
