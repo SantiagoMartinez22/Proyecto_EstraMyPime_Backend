@@ -18,8 +18,9 @@ El proyecto es una REST API que tiene como objetivo funcionar de forma integral 
 ![MySQL](https://img.shields.io/badge/MySQL-Database-blue?style=for-the-badge&logo=mysql)
 ![Maven](https://img.shields.io/badge/Maven-Build%20Tool-orange?style=for-the-badge&logo=apache-maven)
 ![Swagger](https://img.shields.io/badge/Swagger-API%20Documentation-green?style=for-the-badge&logo=swagger)
-![JUnit 5](https://img.shields.io/badge/JUnit%205-Testing-brightgreen?style=for-the-badge&logo=junit)
-![Mockito](https://img.shields.io/badge/Mockito-Testing-orange?style=for-the-badge&logo=mockito)
+![MySQL Driver](https://img.shields.io/badge/MySQL%20Driver-JDBC%20Driver-blue?style=for-the-badge&logo=mysql)
+![Lombok](https://img.shields.io/badge/Lombok-Java%20Library-green?style=for-the-badge&logo=lombok)
+
 
 ![JPA](https://img.shields.io/badge/JPA-Persistence%20API-blueviolet?style=for-the-badge&logo=jpa)
 
@@ -30,8 +31,6 @@ El proyecto es una REST API que tiene como objetivo funcionar de forma integral 
 - **MySQL**: La base de datos de este proyecto utiliza MySQL para almacenar información.
 
 - **Maven**: Maven se usa como herramienta de construccion y gestor de dependencias
-
-- **JUnit 5 y Mockito**: Hemos implementado pruebas unitarias para garantizar la robustez y confiabilidad de nuestro sistema utilizando JUnit 5 y Mockito.
 
 - **Swagger**: para tener acceso a una documentacion descriptiva y facil de usar desde el navegador.
 
