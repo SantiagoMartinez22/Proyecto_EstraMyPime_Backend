@@ -6,6 +6,8 @@ import com.estraMyPime.backend.Model.User;
 import com.estraMyPime.backend.Model.UserDTO;
 import com.estraMyPime.backend.Service.TestService;
 import com.estraMyPime.backend.repository.TestRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +33,12 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/tests")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", allowCredentials = "true", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.PATCH, RequestMethod.DELETE})
-
+@Tag(name = "Test Controller", description = "Controlador para los test")
 public class TestController {
 
     @Autowired
     private TestService testService;
-
+    @Operation(summary = "Obtiene todos los tests")
     @GetMapping("/all")
     public List<TestDTO> getAllTests() {
         List<Test> tests = testService.getAllTests();
@@ -55,27 +57,27 @@ public class TestController {
     }
 
 
-
+    @Operation(summary = "Obtiene por id de usuario")
     @GetMapping
     public List<Test> getTestsByUserId(@RequestParam("userId") Long userId) {
         return testService.getTestsByUserId(userId);
     }
-
+    @Operation(summary = "Obtienen por id del test")
     @GetMapping("/{id}")
     public Optional<Test> getTest(@PathVariable Long id) {
         return testService.getTest(id);
     }
-
+    @Operation(summary = "Crear un nuevo test")
     @PostMapping
     public Test createTest(@RequestBody Test test) {
         return testService.createTest(test);
     }
-
+    @Operation(summary = "Actualizar un test por id")
     @PutMapping("/{id}")
     public Test updateTest(@PathVariable Long id, @RequestBody Test testDetails) {
         return testService.updateTest(id, testDetails);
     }
-
+    @Operation(summary = "Borrar un test por id")
     @DeleteMapping("/{id}")
     public void deleteTest(@PathVariable Long id) {
         testService.deleteTest(id);

@@ -47,9 +47,11 @@ El proyecto es una REST API que tiene como objetivo funcionar de forma integral 
 3. Configure el archivo application.properties en la ruta src/main/resources para conectarse a la base de datos Mysql, puede dejar la configuracion por defecto y configurarla a su necesidad(Contraseña, usuario y direccion a su BD)
 4. Ejecute el archivo pom.xml para descargar las dependencias del proyecto, cargar las configuraciones y que empiece a compilarlo.
 5. Ejecute el archivo BackendApplication para correr el programa.
-6. Acceda a testear y usar la aplicacion desde Postman usando los endpoints que se pueden ver en los controllers
-7. Use la aplicacion desde swagger
+6. Acceda a testear y usar la aplicacion desde Postman usando los endpoints que se pueden ver en los controllers 
+7. Use la aplicacion desde swagger en su local  http://localhost:8080/swagger-ui/index.html#/
 
+# Colecciones postman
+https://www.postman.com/gold-escape-545722/estramypimegrupo3/folder/jzukjtx/teachers?action=share&creator=28945019&ctx=documentation
 # Diagramas
 #### Diagrama de arquitectura
 ![Diagrama de_arquitectura](https://github.com/SantiagoMartinez22/Proyecto_EstraMyPime_Backend/blob/development/architecture.png)
