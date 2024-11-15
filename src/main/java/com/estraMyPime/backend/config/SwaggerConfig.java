@@ -13,9 +13,9 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Documentación de la API EstraMypime")
+                        .title("Documentación de la API EstraMypime parte backend")
                         .version("1.0.0")
-                        .description("Documentación generada automáticamente con Springdoc OpenAPI"));
+                        .description("Documentación generada para la RestApi exponiendo sus endpoints y distintos request posibles"));
     }
 }
 
