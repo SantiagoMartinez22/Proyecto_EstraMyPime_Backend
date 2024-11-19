@@ -16,7 +16,7 @@ CREATE TABLE users (
 
 -- Tabla tests: Relacionada con la tabla users (empresas y personas naturales)
 CREATE TABLE tests (
-                       id INT AUTO_INCREMENT PRIMARY KEY,
+                       id BIGINT  PRIMARY KEY,
                        user_id BIGINT,
                        pregunta1 TEXT,
                        pregunta2 TEXT,
@@ -32,18 +32,18 @@ CREATE TABLE tests (
 
 -- Tabla students: Almacena la información de los estudiantes, con datos opcionales
 CREATE TABLE students (
-                          id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                          id BIGINT  PRIMARY KEY,
                           email VARCHAR(255) UNIQUE NOT NULL,
                           name VARCHAR(255) DEFAULT NULL, -- Opcional, puede ser NULL
-                          haceParteProyecto BOOLEAN DEFAULT TRUE
+                          haceParteProyecto BOOLEAN
 );
 
 -- Tabla teachers: Almacena la información de los profesores, con datos opcionales
 CREATE TABLE teachers (
-                          id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                          id BIGINT  PRIMARY KEY,
                           email VARCHAR(255) UNIQUE NOT NULL,
                           name VARCHAR(255) DEFAULT NULL, -- Opcional, puede ser NULL
-                          profesorParteProyecto BOOLEAN DEFAULT TRUE
+                          profesorParteProyecto BOOLEAN
 );
 
 -- Tabla admins: Almacena la información de los administradores, con datos opcionales
@@ -55,3 +55,20 @@ CREATE TABLE admins (
                         lastname VARCHAR(255) DEFAULT NULL, -- Opcional, puede ser NULL
                         phoneNumber VARCHAR(20) DEFAULT NULL -- Opcional, puede ser NULL
 );
+
+CREATE TABLE empresa_student_teacher (
+                                         empresa_id BIGINT,
+                                         student_id BIGINT,
+                                         teacher_id BIGINT,
+                                         PRIMARY KEY (empresa_id, student_id),
+                                         FOREIGN KEY (empresa_id) REFERENCES users(id) ON DELETE CASCADE,
+                                         FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
+                                         FOREIGN KEY (teacher_id) REFERENCES teachers(id) ON DELETE CASCADE
+);
+
+ALTER TABLE students
+    ADD COLUMN teacher_id BIGINT,
+ADD FOREIGN KEY (teacher_id) REFERENCES teachers(id) ON DELETE SET NULL;
+
+
+ALTER TABLE tests MODIFY COLUMN id BIGINT AUTO_INCREMENT;
